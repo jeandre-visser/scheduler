@@ -1,6 +1,7 @@
 import React from "react";
 import "components/InterviewerList.scss";
 import InterviewerListItem from "./InterviewerListItem";
+import { Value } from "sass";
 
 const InterviewerList = (props) => {
 
@@ -14,8 +15,8 @@ const InterviewerList = (props) => {
             key={interviewer.id}
             name={interviewer.name}
             avatar={interviewer.avatar}
-            selected={props.interviewer === interviewer.id}
-            setInterviewer={() => props.setInterviewer(interviewer.id)}
+            selected={value === interviewer.id}
+            setInterviewer={() => onChange(interviewer.id)}
           />
 
         )}
