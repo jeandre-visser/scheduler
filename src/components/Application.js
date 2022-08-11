@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import "components/Appointment";
 import Appointment from "components/Appointment";
 import axios from "axios";
+import { getAppointmentsForDay } from "helpers/selectors";
 
 
 export default function Application(props) {
@@ -13,8 +14,6 @@ export default function Application(props) {
     days: [],
     appointments: {}
   });
-
-  const dailyAppointments = [];
 
   const setDay = day => {
     setState({...state, day })
@@ -29,7 +28,8 @@ export default function Application(props) {
     })
   }, [])
 
-  
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -58,7 +58,6 @@ export default function Application(props) {
             key={appointment.id}
             {...appointment}
           />  
-          
         )}
         <Appointment key="last" time="5pm" />
       </section>
