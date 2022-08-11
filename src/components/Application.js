@@ -2,6 +2,7 @@ import "components/Application.scss";
 import DayList from "./DayList";
 import React, { useState } from "react";
 import "components/Appointment";
+import Appointment from "components/Appointment";
 
 const days = [
   {
@@ -88,7 +89,14 @@ export default function Application(props) {
       />
       </section>
       <section className="schedule">
-        {Object.values(appointments).map()}
+        {Object.values(appointments).map(appointment => 
+          <Appointment 
+            key={appointment.id}
+            {...appointment}
+          />  
+          
+        )}
+        <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
