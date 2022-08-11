@@ -16,10 +16,7 @@ const Form = (props) => {
             name="name"
             type="text"
             placeholder="Enter Student Name"
-            /*
-              This must be a controlled component
-              your code goes here
-            */
+            onChange={(event) => setStudent(event.target.value)}
           />
         </form>
         <InterviewerList 
