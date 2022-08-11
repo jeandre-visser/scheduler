@@ -58,7 +58,7 @@ export default function Application(props) {
   };
 
   const setDays = days => {
-    setState({...state, days })
+    setState(prev => ({...prev, days }))
   };
   
   useEffect(() => {
