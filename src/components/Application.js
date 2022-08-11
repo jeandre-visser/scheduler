@@ -52,11 +52,23 @@ export default function Application(props) {
     days: [],
     appointments: {}
   });
+
+  const setDay = day => {
+    setState({...state, day })
+  };
+
+  const setDays = days => {
+    setState({...state, days })
+  };
   
   useEffect(() => {
     axios.get("/api/days")
-      .then(response => state.setDays(response.data))
+      .then(response => setDays(response.data))
   }, [])
+
+
+
+
 
   return (
     <main className="layout">
