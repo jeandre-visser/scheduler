@@ -21,11 +21,15 @@ export default function Application(props) {
   };
   
   useEffect(() => {
-    axios.get("/api/days")
-     // .then()
+    Promise.all([
+      axios.get('/api/days'),
+      axios.get('/api/appointments')
+    ]).then((all) => {
+      setState(state => ({...state, days: all[0].data, appointments: all[1].data}))
+    })
   }, [])
 
-
+  
   return (
     <main className="layout">
       <section className="sidebar">
