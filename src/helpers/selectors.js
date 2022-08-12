@@ -30,3 +30,20 @@ export function getInterview(state, interview) {
     }
   }
 }
+
+export function getInterviewersForDay(state, day) {
+  const dayObject = state.days.find(dayItem => dayItem.name === day)
+
+  if (!dayObject) {
+    return [];
+  }
+
+  let interviewersForDay = [];
+
+  for (const id in state.interviewers) {
+    if (dayObject.interviewers.includes(Number(id))) {
+      interviewersForDay.push(state.interviewers[id])
+    }
+  }
+  return interviewersForDay;
+}
