@@ -22,9 +22,8 @@ const useVisualMode = (initial) => {
 // Go back to previous visual mode, but cannot go back further than initial mode
   const back = () => { 
     setHistory(prev => {
-
       const newHistory = history.length > 1 ? [...prev].slice(0, -1) : [...prev];
-  
+
       setMode(newHistory[newHistory.length - 1]);
         return newHistory;
     })
