@@ -10,7 +10,7 @@ const useVisualMode = (initial) => {
   
   const back = () => { 
     setHistory(history => {
-      const newHistory = [...history].slice(0, -1);
+      const newHistory = history.length > 1 ? [...history].slice(0, -1) : [...history];
       setMode(newHistory[newHistory.length - 1]);
       return newHistory;
     })
