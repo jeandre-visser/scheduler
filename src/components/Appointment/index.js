@@ -4,7 +4,7 @@ import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
 import useVisualMode from "hooks/useVisualMode";
-
+import Form from "./Form";
 
 const Appointment = (props) => {
 
@@ -20,10 +20,11 @@ const Appointment = (props) => {
     <article className="appointment">
 
       <Header time={props.time} />
-      {mode === EMPTY && 
+      {mode === EMPTY && (
         <Empty 
           onAdd={() => transition(CREATE)} 
-        />} 
+        />
+      )} 
         
       {mode === SHOW && (
         <Show
@@ -31,7 +32,13 @@ const Appointment = (props) => {
           interviewer={props.interview.interviewer}
         />
       )}
-      
+
+      {mode === CREATE && (
+        <Form 
+          interviewers={[]}
+        />
+      )}
+
     </article>
   );
 }
