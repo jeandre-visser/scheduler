@@ -2,11 +2,15 @@ import React, { useState } from "react";
 
 const useVisualMode = (initial) => {
   const [mode, setMode] = useState(initial);
-  const transition = newMode => setMode(newMode);
-  
+  const transition = newMode => { setMode(newMode) };
+  const back = () => {
+
+  }
+
   return {
     mode,
-    transition
+    transition,
+    back
   };
 }
 
