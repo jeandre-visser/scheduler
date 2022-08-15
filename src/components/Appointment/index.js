@@ -19,13 +19,16 @@ const Appointment = (props) => {
   );
 
   const save = (name, interviewer) => {
+
     const interview = {
       student: name,
       interviewer
     };
 
-    props.bookInterview(props.id, interview)
-      .then(transition(SHOW));
+    transition(SAVING);
+    props 
+      .bookInterview(props.id, interview)
+      .then(() => transition(SHOW));
   }
 
   return (
@@ -48,7 +51,7 @@ const Appointment = (props) => {
         />
       )}
       {mode === SAVING && (
-        <Status message={"Saving"} />
+        <Status message={"SAVING"} />
       )}
     </article>
   );
