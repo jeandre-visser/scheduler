@@ -13,7 +13,7 @@ const Appointment = (props) => {
   const SHOW = "SHOW";
   const CREATE = "CREATE";
   const SAVING = "SAVING";
-  const DELETING = "DELETING"
+  const DELETING = "DELETING";
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -40,8 +40,8 @@ const Appointment = (props) => {
 
     transition(DELETING);
     props
-    .cancelInterview(props.id, interview)
-    .then(() => transition(EMPTY));
+      .cancelInterview(props.id, interview)
+      .then(() => transition(EMPTY));
   }
 
   return (
