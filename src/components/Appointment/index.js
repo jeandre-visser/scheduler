@@ -36,16 +36,16 @@ const Appointment = (props) => {
     props 
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
-      .catch(() => transition(ERROR_SAVE));
+      .catch(() => transition(ERROR_SAVE, true));
   }
 
   const destroy = () => {
 
-
     transition(DELETING);
     props
       .cancelInterview(props.id)
-      .then(() => transition(EMPTY));
+      .then(() => transition(EMPTY))
+      .catch(() => transition(ERROR_DELETE));
   }
 
   return (
