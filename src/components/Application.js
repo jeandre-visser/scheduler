@@ -42,6 +42,7 @@ export default function Application(props) {
       ...state.appointments[id],
       interview: { ...interview }
     };
+
     const appointments = {
       ...state.appointments,
       [id]: appointment
@@ -55,6 +56,21 @@ export default function Application(props) {
     
   };
 
+  const cancelInterview = (id) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: null
+    };
+
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    
+    
+  };
+ 
     return (
       <Appointment
         key={appointment.id}
