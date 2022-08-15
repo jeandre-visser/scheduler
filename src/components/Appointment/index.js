@@ -22,6 +22,7 @@ const Appointment = (props) => {
       interviewer
     };
     props.bookInterview(props.id, interview)
+    transition(SHOW)
   }
 
   return (
