@@ -83,7 +83,7 @@ const Appointment = (props) => {
       )}
       {mode === EDIT && (
         <Form 
-          student={props.interview.student}
+          name={props.interview.student}
           interviewers={props.interviewers}
           interviewer={props.interview.interviewer.id}
           onCancel={() => back()}
