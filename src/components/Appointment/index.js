@@ -12,6 +12,7 @@ const Appointment = (props) => {
   const SHOW = "SHOW";
   const CREATE = "CREATE";
 
+
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -21,8 +22,9 @@ const Appointment = (props) => {
       student: name,
       interviewer
     };
+
     props.bookInterview(props.id, interview)
-    transition(SHOW)
+      .then(transition(SHOW));
   }
 
   return (
