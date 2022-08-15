@@ -36,10 +36,10 @@ const Appointment = (props) => {
     props 
       .bookInterview(props.id, interview)
       .then(() => transition(SHOW))
-      .catch(error => transition(ERROR_SAVE, true));
+      .catch(() => transition(ERROR_SAVE));
   }
 
-  const removeInterview = (name, interviewer) => {
+  const destroy = (name, interviewer) => {
     const interview = {
       student: name,
       interviewer
@@ -82,7 +82,7 @@ const Appointment = (props) => {
         <Confirm 
           message="Are you sure you would like to delete?"
           onCancel={() => back()}
-          onConfirm={removeInterview}
+          onConfirm={destroy}
         />
       )}
       {mode === EDIT && (
