@@ -7,6 +7,7 @@ import useVisualMode from "hooks/useVisualMode.js";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
+import Error from "./Error";
 
 const Appointment = (props) => {
 
@@ -17,6 +18,8 @@ const Appointment = (props) => {
   const DELETING = "DELETING";
   const CONFIRM = "CONFIRM";
   const EDIT = "EDIT";
+  const ERROR_SAVE = "ERROR_SAVE";
+  const ERROR_DELETE = "ERROR_DELETE";
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -32,7 +35,8 @@ const Appointment = (props) => {
     transition(SAVING);
     props 
       .bookInterview(props.id, interview)
-      .then(() => transition(SHOW));
+      .then(() => transition(SHOW))
+      .catch(error => transition(ERROR_SAVE, true));
   }
 
   const removeInterview = (name, interviewer) => {
