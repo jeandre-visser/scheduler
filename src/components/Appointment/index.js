@@ -56,7 +56,7 @@ const Appointment = (props) => {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer.name}
-          onDelete={removeInterview}
+          onDelete={() => transition(CONFIRM)}
         />
       )}
       {mode === CREATE && (
@@ -71,6 +71,13 @@ const Appointment = (props) => {
       )}
       {mode === DELETING && (
         <Status message="DELETING" />
+      )}
+      {mode === CONFIRM && (
+        <Confirm 
+          message="Are you sure you would like to delete?"
+          onCancel={() => back()}
+          onConfirm={removeInterview}
+        />
       )}
     </article>
   );
