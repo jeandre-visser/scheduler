@@ -6,6 +6,7 @@ import Empty from "./Empty";
 import useVisualMode from "hooks/useVisualMode.js";
 import Form from "./Form";
 import Status from "./Status";
+import Confirm from "./Confirm";
 
 const Appointment = (props) => {
 
@@ -14,6 +15,7 @@ const Appointment = (props) => {
   const CREATE = "CREATE";
   const SAVING = "SAVING";
   const DELETING = "DELETING";
+  const CONFIRM = "CONFIRM";
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
