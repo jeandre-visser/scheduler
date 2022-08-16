@@ -4,8 +4,6 @@ import axios from "axios";
 const SET_DAY = "SET_DAY";
 const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 const SET_INTERVIEW = "SET_INTERVIEW";
-// Add a 4th constant/action type to handle the updating of spots remaining
-const SET_INTERVIEW_DAYS = "SET_INTERVIEW_DAYS";
 
 // Use object lookup pattern for reducer function
 const reducer = (state, action) => {
@@ -21,12 +19,6 @@ const reducer = (state, action) => {
       return ({
         ...state,
         ...action.value
-      })
-    },
-    [SET_INTERVIEW_DAYS]: (state, action) => {
-      return ({
-        ...state,
-        days: action.value
       })
     },
     [SET_INTERVIEW]: (state, action) => {
@@ -74,41 +66,48 @@ const useApplicationData = () => {
     )
   }, [])
 
-  // Updates the remaining spots after an interview is booked or cancelled
-  useEffect(() => {
-    axios
-      .get("/api/days")
-      .then(days => dispatch({
-        type: SET_INTERVIEW_DAYS, 
-        value: days.data
-      }))
-  }, [state.appointments])
-
-
   const bookInterview = (id, interview) => {
 
     return axios
     .put(`/api/appointments/${id}`, {interview})
-    .then(res => dispatch({
-      type: SET_INTERVIEW, 
-      value: {
-        id, 
-        interview
+    .then(res => {
+      if (!state.appointments[id].interview) {
+        const dayObj = state.days.find(day => day.name === state.day);
+        state.days[dayObj.id - 1].spots--
+        dispatch({
+          type: SET_INTERVIEW, 
+          value: {
+            id, 
+            interview
+          }
+        })
+      } else {
+        dispatch({
+          type: SET_INTERVIEW, 
+          value: {
+            id, 
+            interview
+          }
+        })
       }
-    }));
+    });
   };
   
   const cancelInterview = (id) => {
     
     return axios
       .delete(`/api/appointments/${id}`)
-      .then(res => dispatch({
-        type: SET_INTERVIEW, 
-        value: {
-          id, 
-          interview: null
-        }
-      }));
+      .then(res => {
+        const dayObj = state.days.find(day => day.name === state.day);
+        state.days[dayObj.id - 1].spots++
+        dispatch({
+          type: SET_INTERVIEW, 
+          value: {
+            id, 
+            interview: null
+          }
+        })
+      });
   };
 
   return {
