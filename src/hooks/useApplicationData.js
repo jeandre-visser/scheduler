@@ -3,8 +3,9 @@ import axios from "axios";
 
 const SET_DAY = "SET_DAY";
 const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
-const SET_INTERVIEW_DAYS = "SET_INTERVIEW_DAYS";
 const SET_INTERVIEW = "SET_INTERVIEW";
+// Add a 4th constant/action type to handle the updating of spots remaining
+const SET_INTERVIEW_DAYS = "SET_INTERVIEW_DAYS";
 
 // Use object lookup pattern for reducer function
 const reducer = (state, action) => {
@@ -65,9 +66,9 @@ const useApplicationData = () => {
     ]).then((all) => dispatch({
         type: SET_APPLICATION_DATA, 
         value: {
-        days: all[0].data, 
-        appointments: all[1].data, 
-        interviewers: all[2].data
+          days: all[0].data, 
+          appointments: all[1].data, 
+          interviewers: all[2].data
         }
       })
     )
