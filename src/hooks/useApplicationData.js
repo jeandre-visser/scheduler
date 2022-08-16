@@ -23,6 +23,14 @@ const useApplicationData = () => {
     })
   }, [])
 
+  useEffect(() => {
+    axios
+      .get("/api/days")
+      .then(days => setState(state => 
+        ({...state, days: days.data})))
+
+  }, [state.appointments])
+
 
   const bookInterview = (id, interview) => {
     const appointment = {
