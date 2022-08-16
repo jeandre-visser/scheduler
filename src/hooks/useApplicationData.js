@@ -74,22 +74,14 @@ const useApplicationData = () => {
       if (!state.appointments[id].interview) {
         const dayObj = state.days.find(day => day.name === state.day);
         state.days[dayObj.id - 1].spots--
-        dispatch({
+      } 
+      dispatch({
           type: SET_INTERVIEW, 
           value: {
             id, 
             interview
           }
         })
-      } else {
-        dispatch({
-          type: SET_INTERVIEW, 
-          value: {
-            id, 
-            interview
-          }
-        })
-      }
     });
   };
   
@@ -100,6 +92,7 @@ const useApplicationData = () => {
       .then(res => {
         const dayObj = state.days.find(day => day.name === state.day);
         state.days[dayObj.id - 1].spots++
+        
         dispatch({
           type: SET_INTERVIEW, 
           value: {
