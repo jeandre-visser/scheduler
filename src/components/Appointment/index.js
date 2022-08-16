@@ -39,13 +39,14 @@ const Appointment = (props) => {
       .catch(() => transition(ERROR_SAVE, true));
   }
 
-  const destroy = () => {
+  const destroy = (event) => {
 
-    transition(DELETING);
+    transition(DELETING, true);
+    
     props
       .cancelInterview(props.id)
       .then(() => transition(EMPTY))
-      .catch(() => transition(ERROR_DELETE));
+      .catch(() => transition(ERROR_DELETE, true));
   }
 
   return (
@@ -89,6 +90,18 @@ const Appointment = (props) => {
           interviewer={props.interview.interviewer.id}
           onCancel={() => back()}
           onSave={save}  
+        />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error 
+          message="Could not save appointment."
+          onClose={() => back()}
+        />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error 
+          message="Could not cancel appointment."
+          onClose={() => back()}
         />
       )}
     </article>
