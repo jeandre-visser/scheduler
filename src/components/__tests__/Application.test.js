@@ -108,7 +108,7 @@ describe("Application", () => {
 
     // Enter a new name into the input with the placeholder "Enter Student Name" 
     fireEvent.change(getByPlaceholderText(appointment, "Enter Student Name"), {
-      target: { value: "Donald Trump" }
+      target: { value: "Jeandre Visser" }
     });
 
     // Click on the first interviewer in the list
@@ -121,7 +121,7 @@ describe("Application", () => {
     expect(getByText(appointment, ("SAVING"))).toBeInTheDocument();
 
     // Wait until the element shows the new student name and Sylvia Palmer as the interviewer
-    await waitForElement(() => getByText(appointment, "Donald Trump"));
+    await waitForElement(() => getByText(appointment, "Jeandre Visser"));
 
     expect(getByText(appointment, "Sylvia Palmer")).toBeInTheDocument();
   });
@@ -157,15 +157,47 @@ describe("Application", () => {
     expect(getByText(appointment, "SAVING")).toBeInTheDocument();
 
     // Wait until the element with the text "could not save appointment" is displayed.
-    await waitForElement(() => getByText(appointment, /could not save appointment/i));
+    await waitForElement(() => getByText(appointment, "Could not save appointment."));
 
     // Click the "Close" button on the error message
     fireEvent.click(getByAltText(appointment, "Close"));
 
     // Check that we return to the placeholder "Enter Student Name"
-    expect(getByPlaceholderText(appointment, "Enter Student Name"));
+    expect(getByPlaceholderText(appointment, "Enter Student Name")).toBeInTheDocument();
   });
 
+  it("shows the delete error when failing to delete an existing appointment", async () => {
+    axios.delete.mockRejectedValueOnce();
 
+    // Render the Application
+    const { container } = render(<Application />)
+
+    // Wait until the text "Archie Cohen" is displayed
+    await waitForElement(() => getByText(container, "Archie Cohen"));
+
+    // Click the "Delete" button on the first booked appointment.
+    const appointment = getAllByTestId(container, "appointment").find(
+      appointment => queryByText(appointment, "Archie Cohen")
+    );
+    fireEvent.click(queryByAltText(appointment, "Delete"));
+
+    // Check that the confirmation message is shown.
+    expect(getByText(appointment, "Are you sure you would like to delete?")).toBeInTheDocument();
+
+    // Click the "Confirm" button on the confirmation.
+    fireEvent.click(queryByText(appointment, "Confirm"));
+
+    // Check that the element with the text "DELETING" is displayed.
+    expect(getByText(appointment, "DELETING")).toBeInTheDocument();
+
+    // Wait until the element with the text "could not cancel appointment" is displayed.
+    await waitForElement(() => getByText(appointment, "Could not cancel appointment."));
+
+    // Click the "Close" button on the error message
+    fireEvent.click(getByAltText(appointment, "Close"));
+
+    // Check that we return to showing the appointment
+    expect(getByText(appointment, "Archie Cohen")).toBeInTheDocument();    
+  }) 
 
 })
