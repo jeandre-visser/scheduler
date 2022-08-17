@@ -41,12 +41,14 @@ describe("Application", () => {
     // Verify that the the appointment element contains the text "SAVING" immediately after the "Save" button is clicked
     expect(getByText(appointment, "SAVING")).toBeInTheDocument();
     
+    // Enter the name "Lydia Miller-Jones" into the input with the placeholder "Enter Student Name".
+    await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
   })
 })
 
 
 
-// Enter the name "Lydia Miller-Jones" into the input with the placeholder "Enter Student Name".
+
 // Click the first interviewer in the list.
 // Click the "Save" button on that same appointment.
 // Check that the element with the text "Saving" is displayed.
