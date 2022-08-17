@@ -19,19 +19,19 @@ describe("Application", () => {
 
   it("loads data, books an interview and reduces the spots remaining for the first day by 1", async () => {
     // Render the Application
-    const { container, debug } = render(<Application/>)
+    const { container } = render(<Application/>)
     
     // Wait until the text "Archie Cohen" is displayed
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
     const appointments = getAllByTestId(container, "appointment");
 
-    const appointment = getAllByTestId(container, "appointment")[0];
+    const appointment = appointments[0];
 
     // Click the "Add" button on the first empty appointment.
     fireEvent.click(getByAltText(appointment, "Add"));
 
-    fireEvent.change(getByPlaceholderText(appointment, /enter student name/i), {
+    fireEvent.change(getByPlaceholderText(appointment, "Enter Student Name"), {
       target: { value: "Lydia Miller-Jones" }
     });
 
@@ -45,8 +45,7 @@ describe("Application", () => {
 
     expect(getByText(appointment, "SAVING")).toBeInTheDocument();
     
-    // Enter the name "Lydia Miller-Jones" into the input with the placeholder "Enter Student Name".
-    // Wait until the element with the text "Lydia Miller-Jones" is displayed.
+    // Enter the name "Lydia Miller-Jones" into the input with the placeholder "Enter Student Name" and wait until the element with the text "Lydia Miller-Jones" is displayed.
     await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
 
     // Find the specific day node that contains the text "Monday"
@@ -54,7 +53,7 @@ describe("Application", () => {
       queryByText(day, "Monday")
     );
     // Check that the day with the text "Monday" also has the text "no spots remaining".
-    expect(getByText(day, /no spots remaining/i)).toBeInTheDocument();
+    expect(getByText(day, "no spots remaining")).toBeInTheDocument();
   })
 })
 
