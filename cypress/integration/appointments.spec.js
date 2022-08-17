@@ -45,5 +45,20 @@ describe("Appointments", () => {
     // verify that the student and interviewer names are shown
     cy.contains(".appointment__card--show", "Lydia Miller-Jones");
     cy.contains(".appointment__card--show", "Tori Malcolm");
-  })
+  });
+
+  it("should cancel an interview", () => {
+    // click the delete button
+    cy.get("[alt=Delete]").click({force: true});
+
+    // click confirm
+    cy.contains("Confirm").click();
+    
+    // check that "DELETING" indicator exists, then after the timeout it no longer exists
+    cy.contains("DELETING").should("exist");
+    cy.contains("DELETING").should("not.exist");
+
+    // verify that the "Archie Cohen" appointment no longer exists
+    cy.contains(".appointment__card--show", "Archie Cohen").should("not.exist");
+  });
 });
