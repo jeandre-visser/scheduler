@@ -33,6 +33,10 @@ This single page React-based web app allows a user to book, edit, and cancel int
 4. Run the webpack development server using `npm start` in the scheduler directory. 
 5. The web app will automatically be served in your browser at <http://localhost:8000/>.
 
+## Stack 
+- React, SCSS
+- Node, PostgreSQL
+
 ## Testing
 - Unit: Storybook
 - Unit/Integration: Jest
@@ -45,7 +49,7 @@ This single page React-based web app allows a user to book, edit, and cancel int
 - Axios
 - react-dom
 - react-scripts
-- Node-postgreSQL
+- sass
 
 
 
