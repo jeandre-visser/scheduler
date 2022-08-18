@@ -34,7 +34,7 @@ This single page React-based web app allows a user to book, edit, and cancel int
 5. The web app will automatically be served in your browser at <http://localhost:8000/>.
 
 ## Stack 
-- React, SCSS
+- React, SCSS, HTML
 - Node, PostgreSQL
 
 ## Testing
