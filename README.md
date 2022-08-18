@@ -10,7 +10,6 @@ This single page React-based web app allows a user to book, edit, and cancel int
 
 ## **Book Interview**
 ![Book Interview](https://github.com/jeandre-visser/scheduler/blob/master/docs/book-interview.png)
-![Save Appointment](https://github.com/jeandre-visser/scheduler/blob/master/docs/save-interview.png)
 
 ## **Cancel Interview Confirmation**
 ![Cancel Interview](https://github.com/jeandre-visser/scheduler/blob/master/docs/cancel-interview.png)
