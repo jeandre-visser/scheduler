@@ -3,6 +3,8 @@ This single page React-based web app allows a user to book, edit, and cancel int
 
 ## Quick Glimpse
 
+## **Walkthrough**
+![Walkthrough](https://github.com/jeandre-visser/scheduler/blob/master/docs/Interview%20Scheduler.gif)
 ## **Main Page**
 ![Main Page](https://github.com/jeandre-visser/scheduler/blob/master/docs/appointments.png)
 
@@ -34,7 +36,7 @@ This single page React-based web app allows a user to book, edit, and cancel int
 
 ## Testing
 - Unit: Storybook
-- Unit/Integration:  Jest
+- Unit/Integration: Jest
 - End to End: Cypress
 
 
