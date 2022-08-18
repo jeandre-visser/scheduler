@@ -73,8 +73,8 @@ const useApplicationData = () => {
     .then(res => {
       // decrease spots remaining by 1 when booking an interview
         const dayBooked = state.days.find(day => day.name === state.day);
-        state.days[dayBooked.id - 1].spots--
-      // } 
+        state.days[dayBooked.id - 1].spots--;
+  
       dispatch({
           type: SET_INTERVIEW, 
           value: {
@@ -92,7 +92,7 @@ const useApplicationData = () => {
       .then(res => {
         // increase spots remaining by 1 when cancelling an interview
         const dayCancelled = state.days.find(day => day.name === state.day);
-        state.days[dayCancelled.id - 1].spots++
+        state.days[dayCancelled.id - 1].spots++;
         
         dispatch({
           type: SET_INTERVIEW, 
