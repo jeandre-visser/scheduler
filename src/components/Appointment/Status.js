@@ -11,6 +11,6 @@ const Status = (props) => {
       <h1 className="text--semi-bold">{props.message}</h1>
     </main>
   );
-}
+};
 
 export default Status;
