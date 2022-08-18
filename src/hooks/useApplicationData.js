@@ -9,12 +9,12 @@ const SET_INTERVIEW = "SET_INTERVIEW";
 const reducer = (state, action) => {
   const reducers = {
     // To use the constant values with an object lookup, we need to use computed property names ( set inside [] )
-    // [SET_DAY]: (state, action) => {
-    //   return ({
-    //     ...state,
-    //     ...action.value
-    //   })
-    // },
+    [SET_DAY]: (state, action) => {
+      return ({
+        ...state,
+        ...action.value
+      })
+    },
     [SET_APPLICATION_DATA]: (state, action) => {
       return ({
         ...state,
