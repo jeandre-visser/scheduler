@@ -4,7 +4,7 @@ This single page React-based web app allows a user to book, edit, and cancel int
 ## Quick Glimpse
 
 ## **Walkthrough**
-![Walkthrough](https://github.com/jeandre-visser/scheduler/blob/master/docs/Interview%20Scheduler.gif)
+![Walkthrough](https://github.com/jeandre-visser/scheduler/blob/master/docs/walkthrough.gif)
 ## **Main Page**
 ![Main Page](https://github.com/jeandre-visser/scheduler/blob/master/docs/appointments.png)
 
