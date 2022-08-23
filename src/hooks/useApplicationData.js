@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import {useReducer, useEffect} from "react";
 import axios from "axios";
 
 const SET_DAY = "SET_DAY";
@@ -24,14 +24,14 @@ const reducer = (state, action) => {
     [SET_INTERVIEW]: (state, action) => {
       const appointment = {
         ...state.appointments[action.value.id],
-        interview: { ...action.value.interview },
+        interview: {...action.value.interview},
       };
 
       const appointments = {
         ...state.appointments,
         [action.value.id]: appointment,
       };
-      return { ...state, appointments };
+      return {...state, appointments};
     },
   };
   return reducers[action.type](state, action) || state;
@@ -46,7 +46,7 @@ const useApplicationData = () => {
   });
 
   const setDay = (day) => {
-    dispatch({ type: SET_DAY, value: { day } });
+    dispatch({type: SET_DAY, value: {day}});
   };
 
   useEffect(() => {
@@ -67,18 +67,28 @@ const useApplicationData = () => {
   }, []);
 
   const bookInterview = (id, interview) => {
-    return axios.put(`/api/appointments/${id}`, { interview }).then((res) => {
+    return axios.put(`/api/appointments/${id}`, {interview}).then((res) => {
       // decrease spots remaining by 1 when booking an interview
-      const dayBooked = state.days.find((day) => day.name === state.day);
-      state.days[dayBooked.id - 1].spots--;
-
-      dispatch({
-        type: SET_INTERVIEW,
-        value: {
-          id,
-          interview,
-        },
-      });
+      /** Add conditional to decrease spots remaining ONLY if the state of the appointment id for an interview does not already exist (the appointment has not yet been added to the schedule), so that spots remaining do not also decrease after saving an edited appointment (the appointment already exists, so spots remain the same) */
+      if (!state.appointments[id].interview) {
+        const dayBooked = state.days.find((day) => day.name === state.day);
+        state.days[dayBooked.id - 1].spots--;
+        dispatch({
+          type: SET_INTERVIEW,
+          value: {
+            id,
+            interview,
+          },
+        });
+      } else {
+        dispatch({
+          type: SET_INTERVIEW,
+          value: {
+            id,
+            interview,
+          },
+        });
+      }
     });
   };
 
@@ -87,7 +97,6 @@ const useApplicationData = () => {
       // increase spots remaining by 1 when cancelling an interview
       const dayCancelled = state.days.find((day) => day.name === state.day);
       state.days[dayCancelled.id - 1].spots++;
-
       dispatch({
         type: SET_INTERVIEW,
         value: {
